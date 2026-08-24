@@ -306,10 +306,11 @@ export default function App(){
       setEstimating(true);
       setCost(null);
       setTimeText("");
-      const res = await fetch("http://localhost:8000/estimate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+      const API_URL = import.meta.env.VITE_API_URL;
+      const res = await fetch(`${API_URL}/estimate`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
       });
       if(!res.ok) throw new Error(await res.text());
       const data = await res.json();
